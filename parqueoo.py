@@ -1,5 +1,5 @@
-import re
-from datetime import datetime
+import re 
+from datetime import datetime 
 
 class Parqueo:
     TARIFA_POR_HORA = 2.0  # Tarifa fija por hora
@@ -7,6 +7,8 @@ class Parqueo:
     def __init__(self, total_espacios):
         self.espacios_disponibles = total_espacios
         self.estacionados = {}
+
+        # registrar entrada
 
     def registrar_entrada(self):
         """Registra la entrada de un vehículo."""
@@ -29,10 +31,12 @@ class Parqueo:
         else:
             print("\n🚫 ¡No hay espacios disponibles! Intenta más tarde.")
         print("-" * 40)
-
+        # Registrar salida
     def registrar_salida(self):
         """Registra la salida de un vehículo y cobra el estacionamiento."""
         placa = input("\nIngresa la placa del vehículo: ").upper().strip()
+
+        #calcularemos la tarifa
 
         if placa in self.estacionados:
             tiempo_total = (datetime.now() - self.estacionados.pop(placa)["hora_entrada"]).total_seconds()
@@ -40,6 +44,7 @@ class Parqueo:
             minutos = (tiempo_total % 3600) / 60
             monto = round((tiempo_total / 3600) * self.TARIFA_POR_HORA, 2)
 
+        #+1 espacio disponible
             self.espacios_disponibles += 1
             print(f"\n🚗 ¡Vehículo {placa} salió con éxito!")
             print(f"⏳ Tiempo estacionado: {int(horas)} horas y {int(minutos)} minutos")
@@ -47,6 +52,8 @@ class Parqueo:
         else:
             print("\n❌ ¡Placa no registrada en el parqueo!")
         print("-" * 40)
+
+        # Espacios displonibles
 
     def ver_espacios_disponibles(self):
         """Muestra la cantidad de espacios disponibles en el parqueo."""
